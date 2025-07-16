@@ -9,13 +9,13 @@ pipeline {
         }
         stage('安装依赖') {
             steps {
-                bat 'pip install requests pytest'  // Linux环境，Windows替换为bat命令
+                bat 'pip install requests pytest'  // Windows环境使用bat命令
                 echo "依赖安装完成"
             }
         }
         stage('运行自动化测试') {
             steps {
-                sh 'pytest test_httpbin.py -v --junitxml=report.xml'
+                bat 'pytest test_httpbin.py -v --junitxml=report.xml'  // Windows使用bat执行pytest
                 echo "测试完成，生成报告：report.xml"
             }
             post {
@@ -26,11 +26,13 @@ pipeline {
         }
         stage('部署与验证') {
             steps {
-                // 模拟部署：复制测试脚本到本地部署目录
-                sh 'mkdir -p /tmp/deploy && cp test_httpbin.py /tmp/deploy'
+                // Windows环境：创建部署目录并复制测试脚本
+                bat 'mkdir /tmp/deploy'
+                bat 'copy test_httpbin.py C:\\tmp\\deploy'
+
                 // 部署后验证：运行部署目录中的脚本
-                sh 'python /tmp/deploy/test_httpbin.py'
-                echo "部署至/tmp/deploy完成，验证通过"
+                bat 'python C:\\tmp\\deploy\\test_httpbin.py'
+                echo "部署至C:\\tmp\\deploy完成，验证通过"
             }
         }
     }
