@@ -1,0 +1,15 @@
+stages:
+  - test
+
+python_test:
+  stage: test
+  image: python:3.9  # 使用官方Python镜像
+  before_script:
+    - pip install requests pytest  # 安装依赖
+  script:
+    - pytest test_httpbin.py -v --junitxml=report.xml  # 运行测试并生成报告
+  artifacts:
+    reports:
+      junit: report.xml  # 保存测试报告供GitLab识别
+  only:
+    - main  # 仅在main分支提交时触发
