@@ -26,5 +26,4 @@ def test_httpbin_get():
 
 if __name__ == "__main__":
     # 生成JUnit格式报告（方便Jenkins识别）
->>>>>>> ebd0c7af2bec4f49519ef3f26275f9cfb42d0602
     pytest.main(["-v", "test_httpbin.py", "--junitxml=report.xml"])
