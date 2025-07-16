@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('拉取代码') {
             steps {
-                git url: 'https://github.com/your-username/test-repo.git', branch: 'main'
+                git url: 'https://github.com/zemuerqi/newbook.git', branch: 'main'
                 echo "代码拉取完成，当前目录：${workspace}"
             }
         }
