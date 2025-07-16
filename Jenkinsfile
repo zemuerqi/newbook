@@ -9,7 +9,7 @@ pipeline {
         }
         stage('安装依赖') {
             steps {
-                sh 'pip install requests pytest'  // Linux环境，Windows替换为bat命令
+                bat 'pip install requests pytest'  // Linux环境，Windows替换为bat命令
                 echo "依赖安装完成"
             }
         }
